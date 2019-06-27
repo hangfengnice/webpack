@@ -1,37 +1,31 @@
-// import logo from './yingying.png'
-import  './index.css'
-
-// let image = new Image()
-
-// image.src = logo
-
-// document.body.appendChild(image)
-
-
-
 
 // import $ from 'jquery'
 
 // console.log($)
-// require('./hello')
+// console.log(window.$)
+
+
+
+
+
 // console.log('hello')
 
+// require('@babel/polyfill')
+require('./mian.css')
 
-// let fn = () => {
-//   console.log('hi')
-// }
+// require('./main.less')
 
-// fn()
+// require('./main.scss')
 
+// @log
 // class A{
 //   a = 1
 // }
-
 // let a = new A()
-
 // console.log(a.a)
-
-// function * gen(){
-// yield 1
+// function log(target){
+//   console.log(target, '23')
 // }
-// console.log(gen().next())
+
+// 'aaa'.includes('a')
+

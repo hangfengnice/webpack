@@ -1,50 +1,68 @@
 const path = require("path");
-let webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require('webpack')
 
-let HtmlWebpakPlugin = require("html-webpack-plugin");
 module.exports = {
   devServer: {
-    open: true,
-    contentBase: path.join(__dirname, "dist")
+    progress: true,
+    contentBase: "./dist",
+    open: true
   },
   mode: "development",
-  entry: "./src",
+  entry: "./src/index.js",
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist")
   },
   plugins: [
-    new HtmlWebpakPlugin({
-      template: "./src/index.html",
+    new HtmlWebpackPlugin({
+      template: "./index.html",
       filename: "index.html"
+    }),
+    new webpack.ProvidePlugin({
+      $: "jquery"
     })
-    // new webpack.ProvidePlugin({ // 在每个模块中都注入$
-    //   '$': 'jquery'
-    // })
   ],
   externals: {
-    jquery: "jQuery"
+"jquery": "$"
   },
   module: {
     rules: [
-      // {
-      //   test: require.resolve("jquery"),
-      //   use: "expose-loader?$"
-      // },
-      {
-        test: /\.(png|jpg|gif)/,
-        use: "file-loader"
-      },
       {
         test: /\.css$/,
+        use: ["style-loader", "css-loader"]
+      },
+      {
+        test: /\.less$/,
         use: [
-          { loader: "style-loader" },
-          { loader: "css-loader" }
+          {
+            loader: "style-loader" // creates style nodes from JS strings
+          },
+          {
+            loader: "css-loader" // translates CSS into CommonJS
+          },
+          {
+            loader: "less-loader" // compiles Less to CSS
+          }
         ]
       },
-
       {
-        test: /\.js$/,
+        test: /\.scss$/,
+        use: [
+          "style-loader", // 将 JS 字符串生成为 style 节点
+          "css-loader", // 将 CSS 转化成 CommonJS 模块
+          "sass-loader" // 将 Sass 编译成 CSS，默认使用 Node Sass
+        ]
+      },
+      {
+          test: /\.(png|svg|jpg|gif)$/,
+          use: [
+            'file-loader'
+          ]
+        },
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
         use: {
           loader: "babel-loader",
           options: {
@@ -56,7 +74,6 @@ module.exports = {
             ]
           }
         },
-        include: path.resolve(__dirname, "src"),
         exclude: /node_modules/
       }
     ]
