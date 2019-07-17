@@ -10,6 +10,25 @@ module.exports = {
     filename: "[name].[hash:8].js",
     path: path.resolve(__dirname, "build")
   },
+  optimization: {
+    usedExports: true,
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendors:{
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          filename: "vendors.js"
+        },
+        default:{
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    },
+    
+  },
   devServer: {
     contentBase: "./build",
     open: true,

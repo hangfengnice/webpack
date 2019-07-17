@@ -1,18 +1,10 @@
-
-import React,{Component} from 'react'
-import ReactDom from 'react-dom'
-
-class App extends Component {
-  constructor(){
-    super()
-  }
-  render(){
-    return <div>hello world</div>
-  }
+function getComponent(){
+  return import(/* webpackChunkName:"lodash" */'lodash').then(({default: _}) => {
+   element.innerHtml  = _.join(['hang','feng'],'-')
+   return element
+  })
 }
 
-ReactDom.render(<App />, document.getElementById('root'))
-
-
+getComponent()
 
 
