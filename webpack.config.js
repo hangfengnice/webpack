@@ -3,8 +3,12 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const webpack = require("webpack");
 
+
 module.exports = {
   mode: "development",
+  resolve: {
+    extensions: ['.js','.jsx','.vue']
+  },
   entry: path.resolve(__dirname, "src/index"),
   output: {
     filename: "[name].[hash:8].js",
@@ -21,7 +25,7 @@ module.exports = {
           filename: "vendors.js"
         },
         default:{
-          minChunks: 2,
+
           priority: -20,
           reuseExistingChunk: true
         }
@@ -70,6 +74,7 @@ module.exports = {
       title: "hangfeng",
       template: path.resolve(__dirname, "index.html")
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+
   ]
 };

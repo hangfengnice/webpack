@@ -1,10 +1,3 @@
-function getComponent(){
-  return import(/* webpackChunkName:"lodash" */'lodash').then(({default: _}) => {
-   element.innerHtml  = _.join(['hang','feng'],'-')
-   return element
-  })
-}
+import './assets/avatar.css'
 
-getComponent()
-
-
+console.log('hello')
