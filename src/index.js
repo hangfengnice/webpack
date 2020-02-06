@@ -1,3 +1,2 @@
-import './assets/avatar.css'
-
-console.log('hello')
+// React
+import './js/react.js'
